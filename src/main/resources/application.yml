@@ -1,0 +1,30 @@
+spring:
+  messages:
+    encoding: UTF-8
+
+APP_ID: 863fb6ea879f43be8e3be4b25a9477e6
+rate:
+  url: https://openexchangerates.org
+  latest: /api/latest.json?app_id=${APP_ID}
+  yesterday: /api/historical/{date}.json?app_id=${APP_ID}
+
+API_KEY: c3UOJRQlYDUWzDQRBm1uCZUcskTAjGF6
+gif:
+  url: https://api.giphy.com/v1/gifs
+  rich: /random?tag=rich&limit=1&api_key=${API_KEY}
+  broke: /random?tag=broke&limit=1&api_key=${API_KEY}
+
+---
+
+spring:
+  profiles: test
+
+rate:
+  url: http://localhost:8089
+  latest: /api/latest
+  yesterday: /api/historical
+
+gif:
+  url: http://localhost:8089
+  rich: /random/rich
+  broke: /random/broke

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+    <Properties>
+        <property name="log_dir">logs</property>
+        <property name="pattern_console">
+            %d{ABSOLUTE} %-5level %logger{1} - %msg%n
+        </property>
+        <property name="pattern_text_file">
+            %d{ISO8601} %-5level %logger{} - %msg%n
+        </property>
+        <property name="pattern_log_dir">
+            logs/${date:yyyy-MM-dd}%d{yyyy-MM-dd_HH-mm}_%i.log
+        </property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern_console}"/>
+        </Console>
+        <RollingFile name="TextFile" fileName="${log_dir}/exchange.log" append="true"
+                     filePattern="${pattern_log_dir}">
+            <PatternLayout pattern="${pattern_text_file}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="300 KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="100"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="TextFile" level="info"/>
+            <AppenderRef ref="Console" level="info"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
